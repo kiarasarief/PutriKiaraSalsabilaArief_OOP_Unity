@@ -1,48 +1,35 @@
-// Putri Kiara Salsabila Arief (2306250743)
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // static instance untuk membuat singleton
-    public static Player Instance;
-
+    public static Player Instance { get; set; }
     private PlayerMovement playerMovement;
     private Animator animator;
+    public Weapon currentWeapon;
 
-    void Awake()
-    {
-        // implementasi singleton pattern
-        if (Instance == null)
-        {
-            Instance = this;  // tetapkan instance ini sebagai instance tunggal
-            DontDestroyOnLoad(gameObject); // pilihan: jangan hancurkan saat berpindah scene
-        }
-        else
-        {
-            // Jika sudah ada instance lain, hancurkan objek ini
-            Destroy(gameObject);
+
+    void Awake() {
+        if (Instance != null && Instance != this) { 
+            Destroy(gameObject); 
+        } 
+        else { 
+            Instance = this; 
+            DontDestroyOnLoad(gameObject);
         }
     }
 
-    void Start()
-    {
-        // ambil referensi dari PlayerMovement dan Animator
+    void Start() {
         playerMovement = GetComponent<PlayerMovement>();
-        animator = transform.Find("EngineEffect").GetComponent<Animator>(); // menemukan Animator di anak GameObject "EngineEffect"
+        animator = transform.Find("Engine/EngineEffect").GetComponent<Animator>();
     }
 
-    void FixedUpdate()
-    {
-        // memanggil method Move() dari PlayerMovement untuk menggerakkan player
+    void FixedUpdate() {
         playerMovement.Move();
     }
 
-    void LateUpdate()
-    {
-        // mengatur nilai parameter IsMoving pada Animator berdasarkan kondisi PlayerMovement
+    void LateUpdate() {
         animator.SetBool("IsMoving", playerMovement.IsMoving());
     }
 }
-

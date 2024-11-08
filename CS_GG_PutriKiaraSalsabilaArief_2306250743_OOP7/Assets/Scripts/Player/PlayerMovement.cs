@@ -1,4 +1,3 @@
-// Putri Kiara Salsabila Arief (2306250743)
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,69 +15,66 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 stopFriction;
     private Rigidbody2D rb;
 
-    void Start()
-    {
-        // Ambil referensi dari Rigidbody2D
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
-
-        // Inisialisasi kecepatan awal ke nol
-        moveVelocity = Vector2.zero;
         rb.velocity = Vector2.zero;
 
-        // Kalkulasi nilai untuk moveFriction dan stopFriction sesuai rumus
-        moveFriction = -2 * maxSpeed / (timeToFullSpeed * timeToFullSpeed);
-        stopFriction = -2 * maxSpeed / (timeToStop * timeToStop);
+        moveVelocity = 2 * maxSpeed / timeToFullSpeed;
+        moveFriction = (-2) * maxSpeed / (timeToFullSpeed * timeToFullSpeed);
+        stopFriction = (-2) * maxSpeed / (timeToStop * timeToStop);
     }
 
-    public void Move()
-    {
-        // Mendapatkan input dari pengguna 
-        moveDirection = new Vector2(-Input.GetAxis("Horizontal"), -Input.GetAxis("Vertical"));
+    public void Move() {
+        float input_X = Input.GetAxis("Horizontal");
+        float input_Y = Input.GetAxis("Vertical");
 
-
-        // Menghitung moveVelocity dengan friction dan input
-        moveVelocity += moveDirection * GetFriction() * Time.deltaTime;
-
-        // Batasi kecepatan pada maxSpeed
-        moveVelocity.x = Mathf.Clamp(moveVelocity.x, -maxSpeed.x, maxSpeed.x);
-        moveVelocity.y = Mathf.Clamp(moveVelocity.y, -maxSpeed.y, maxSpeed.y);
-
-        // Menerapkan kecepatan pada Rigidbody2D
-        rb.velocity = moveVelocity;
-
-        // Jika kecepatan lebih rendah dari stopClamp, set moveVelocity menjadi nol
-        if (moveVelocity.magnitude < stopClamp.magnitude)
-        {
-            moveVelocity = Vector2.zero;
+        if (input_X == 0 && input_Y == 0) {
+            rb.velocity = Vector2.zero;
+            return;
         }
 
-        // Panggil MoveBound untuk membatasi posisi
+        moveDirection = new Vector2(input_X, input_Y).normalized;
+        Vector2 friction = GetFriction();
+
+        Vector2 newVelocity = rb.velocity + (moveDirection * moveVelocity) - friction;
+        
+        rb.velocity = new Vector2(
+            Mathf.Clamp(newVelocity.x, -maxSpeed.x, maxSpeed.x),
+            Mathf.Clamp(newVelocity.y, -maxSpeed.y, maxSpeed.y)
+        );    
+
         MoveBound();
     }
 
-    private Vector2 GetFriction()
-    {
-        // Mengembalikan nilai gesekan yang sesuai
-        return moveDirection != Vector2.zero ? moveFriction : stopFriction;
+    public Vector2 GetFriction() {
+        Vector2 friction = Vector2.zero;
+
+        if (moveDirection == Vector2.zero) {
+            friction.x = rb.velocity.x * stopFriction.x;
+            friction.y = rb.velocity.y * stopFriction.y;
+        }
+        else {
+            friction.x = rb.velocity.x * moveFriction.x;
+            friction.y = rb.velocity.y * moveFriction.y;
+        }
+
+        friction.x = Mathf.Clamp(friction.x, -Mathf.Abs(rb.velocity.x), Mathf.Abs(rb.velocity.x));
+        friction.y = Mathf.Clamp(friction.y, -Mathf.Abs(rb.velocity.y), Mathf.Abs(rb.velocity.y));
+
+        return friction;
     }
 
-    private void MoveBound()
-    {
-        Vector3 pos = transform.position;
-        
-        // Atur batas posisi sesuai ukuran layar (sesuaikan nilai dengan area permainan)
-        pos.x = Mathf.Clamp(pos.x, -8f, 8f); // batas kiri dan kanan
-        pos.y = Mathf.Clamp(pos.y, -4f, 4f); // batas atas dan bawah
+    private void MoveBound() {
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        // Terapkan posisi yang sudah di-*clamp* kembali ke transform
-        transform.position = pos;
+        transform.position = new Vector2(
+            Mathf.Clamp(transform.position.x, min.x + (transform.localScale.x / 3), max.x - (transform.localScale.x / 3)),
+            Mathf.Clamp(transform.position.y, min.y + (transform.localScale.y / 10), max.y - (transform.localScale.y / 1.5f))
+        );
     }
 
-    public bool IsMoving()
-    {
-        // Mengembalikan true jika Player bergerak, false jika tidak
-        return moveVelocity.magnitude > 0;
+    public bool IsMoving() {
+        return (Mathf.Abs(rb.velocity.x) > stopClamp.x) || (Mathf.Abs(rb.velocity.y) > stopClamp.y);
     }
 }
-
-
