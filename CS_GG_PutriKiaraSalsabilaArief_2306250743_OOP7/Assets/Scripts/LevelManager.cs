@@ -13,8 +13,8 @@ public class LevelManager : MonoBehaviour
     private IEnumerator LoadSceneAsync(string sceneName) {       
         animator.gameObject.SetActive(true);
 
-        animator.SetTrigger("Start");
-        animator.ResetTrigger("Start");
+        //animator.SetTrigger("Start");
+        //animator.ResetTrigger("Start");
         yield return new WaitForSeconds(1);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 
         Player.Instance.transform.position = new Vector3(0, 0, 0);
 
-        animator.SetTrigger("End");
+        animator.SetTrigger("EndTrasition");
     }
 
     public void LoadScene(string sceneName) {
