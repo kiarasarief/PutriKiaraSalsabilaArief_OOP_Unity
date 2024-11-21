@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52107723057087125}
+  - component: {fileID: 8820944739501072584}
   - component: {fileID: 7676656727580905052}
   - component: {fileID: 3935682782610423055}
   - component: {fileID: 6020266330614553623}
-  - component: {fileID: 9009805951601589613}
-  - component: {fileID: 4945666380853194086}
+  - component: {fileID: -2572232382867600312}
   - component: {fileID: 661370513772639412}
+  - component: {fileID: 1134001784248842091}
   - component: {fileID: 3862571265600101725}
   - component: {fileID: 664160448857388974}
   m_Layer: 0
@@ -33,12 +34,24 @@ Transform:
   m_GameObject: {fileID: 6494267618782161784}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0018089117, y: -0.0012308428, z: -0.9999848, w: -0.0050766254}
-  m_LocalPosition: {x: 0.0047277454, y: 3.6805305, z: -0.0011528007}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.14, y: 0.208, z: -180.582}
+--- !u!114 &8820944739501072584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494267618782161784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd933ef9cdc2dd499cd1e8db0dbd443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &7676656727580905052
 Rigidbody2D:
   serializedVersion: 4
@@ -98,7 +111,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.4236111}
+  m_Offset: {x: 0, y: 0.46162495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: -0.35897437}
@@ -109,7 +122,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.41666666, y: 0.375}
+  m_Size: {x: 0.41666666, y: 0.4510277}
   m_EdgeRadius: 0
 --- !u!212 &6020266330614553623
 SpriteRenderer:
@@ -163,7 +176,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9009805951601589613
+--- !u!114 &-2572232382867600312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,25 +188,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f04948d2ff6514d88020ead77c0527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  enemySprite: {fileID: -2605354425736290502, guid: 5e99b48978baaa548aa6a20720616c8a, type: 3}
---- !u!114 &4945666380853194086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6494267618782161784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f78e1716a8463c145a9338a8b2355e08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootIntervalInSeconds: 0.5
-  WeaponPrefab: {fileID: 7325442601483182830, guid: c1144c9aee926fd429f4204b490b60bf, type: 3}
-  EnemyBullet: {fileID: 0}
-  EnemyBulletSpawnPoint: {fileID: 0}
-  parentTransform: {fileID: 0}
+  leftBound: 0
+  rightBound: 0
+  spawnInterval: 15
+  minSpawnY: 3
+  maxSpawnY: 5
+  speed: 2
+  maxBosses: 1
+  weaponPrefab: {fileID: 2531525175356616457, guid: c1144c9aee926fd429f4204b490b60bf, type: 3}
+  weaponMountOffset: {x: 0.5, y: 1, z: -1}
 --- !u!114 &661370513772639412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +210,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 700
+--- !u!114 &1134001784248842091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494267618782161784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa0230b85872974d8f68d1a572c709d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: cc020462282f4b6408f21e8267234315, type: 2}
+  isInvincible: 0
 --- !u!114 &3862571265600101725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthComponent: {fileID: 661370513772639412}
-  invincibilityComponent: {fileID: 0}
 --- !u!114 &664160448857388974
 MonoBehaviour:
   m_ObjectHideFlags: 0

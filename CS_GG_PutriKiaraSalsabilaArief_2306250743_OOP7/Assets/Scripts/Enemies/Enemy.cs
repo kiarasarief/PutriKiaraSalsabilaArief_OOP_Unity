@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int level;  
+    [SerializeField]public int level;  
     public Sprite enemySprite; 
     private Rigidbody2D rb;
 
@@ -13,7 +12,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();  
         if (rb != null)
         {
-            rb.gravityScale = 0;   
+            rb.gravityScale = 0;  
         }
 
         if (enemySprite != null)

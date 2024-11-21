@@ -1,50 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float rotateSpeed;
-    private Vector2 newPosition;
+    [SerializeField] float speed;
+    [SerializeField] float rotateSpeed;
 
-    private void Start() {
+    Vector2 newPosition;
+
+    void Start()
+    {
+        newPosition = new Vector2(-2, -2);
         ChangePosition();
     }
 
-    private void Update() {
-        if (Player.Instance != null) {
-            if (Player.Instance.currentWeapon != null) {
-                GetComponent<Collider2D>().enabled = true;
-                GetComponent<SpriteRenderer>().enabled = true;
-            } else {
-                GetComponent<Collider2D>().enabled = false;
-                GetComponent<SpriteRenderer>().enabled = false;
-            }
-        } 
+    void Update()
+    {
+        Weapon weapon = FindObjectOfType<Weapon>();
+
+        Vector2 currentPosition = transform.position;
+
+        if (Vector2.Distance(currentPosition, newPosition) < 0.5f)
+        {
+            ChangePosition();
+            Debug.Log("New position chosen: " + newPosition);
+        }
+
+        if (weapon == null)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<CircleCollider2D>().enabled = true;
+            GetComponent<Collider2D>().enabled = true;
+        }
 
         transform.position = Vector2.MoveTowards(transform.position, newPosition, speed * Time.deltaTime);
         transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, newPosition) < 0.5f) {
-            ChangePosition();
-        }
     }
 
-    private void ChangePosition() {
-        float posisirandom_X = Random.Range(-4, 4);
-        float posisirandom_Y = Random.Range(-2, 2);
-        newPosition = new Vector2(posisirandom_X, posisirandom_Y);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Player player = other.GetComponent<Player>();
-
-        if (other.CompareTag("Player")) {
-            if (player != null && player.currentWeapon != null) {               
-                GameManager.Instance.LevelManager.LoadScene("Main");
-            }
+        Weapon weapon = FindObjectOfType<Weapon>();
+        if (other.gameObject.CompareTag("Player") && weapon != null)
+        {
+            Debug.Log("Player passed through the portal!");
+            GameManager.Instance.LevelManager.LoadScene("Main");
         }
+        else
+        {
+            Debug.Log("Not a player");
+        }
+    }
+
+    void ChangePosition()
+    {
+        newPosition = new Vector2(Random.Range(-8f, 8f), Random.Range(-4f, 4f));
+        speed = 0.4f;
+        rotateSpeed = Random.Range(50f, 200f);
     }
 }

@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 public class EnemyTargeting : Enemy
 {
     private float speed = 2f;
+
     private float CameraTop;
     private float CameraBottom;
     private float CameraRight;

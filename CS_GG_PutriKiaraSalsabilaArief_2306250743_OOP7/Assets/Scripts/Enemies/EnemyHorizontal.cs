@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 public class EnemyHorizontal : Enemy
@@ -9,13 +8,17 @@ public class EnemyHorizontal : Enemy
 
     private float CameraTop, CameraBottom, CameraRight, CameraLeft;
 
+    EnemyHorizontal()
+    {
+        level = 1;
+    }
     private void Start()
     {
         CameraTop = Camera.main.transform.position.y + Camera.main.orthographicSize;
         CameraBottom = Camera.main.transform.position.y - Camera.main.orthographicSize;
         CameraRight = Camera.main.transform.position.x + Camera.main.orthographicSize * Camera.main.aspect;
         CameraLeft = Camera.main.transform.position.x - Camera.main.orthographicSize * Camera.main.aspect;
-        
+
         Vector3 spawn;
         if(Random.value < 0.5f)
         {
@@ -30,7 +33,6 @@ public class EnemyHorizontal : Enemy
 
         xMin = CameraLeft;
         xMax = CameraRight;
-
         speed *= spawn.x < 0 ? 1 : -1;
     }
 

@@ -1,22 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
     public LevelManager LevelManager { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
-        if (Instance == null) {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
 
-            LevelManager = GetComponentInChildren<LevelManager>();
-        }
-        else {
-            Destroy(gameObject);
-        }
+        Instance = this;
+
+        LevelManager = GetComponentInChildren<LevelManager>();
+
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(GameObject.Find("Camera"));
     }
 }

@@ -1,3 +1,4 @@
+//Putri Kiara Salsabila Arief (2306250743)
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +15,11 @@ public class EnemyBullet : MonoBehaviour
     private IObjectPool<EnemyBullet> objectPool;
     public IObjectPool<EnemyBullet> ObjectPool { set => objectPool = value; }
 
-    // Called when the object is instantiated
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update EnemyBullet movement
     void FixedUpdate()
     {
         if (rb != null)
@@ -30,7 +29,6 @@ public class EnemyBullet : MonoBehaviour
         CameraBound();
     }
 
-    // Deactivate EnemyBullet after timeout
     public void Deactivate()
     {
         StartCoroutine(DeactivateAfterTimeout(timeoutDelay));
@@ -43,14 +41,14 @@ public class EnemyBullet : MonoBehaviour
         rb.velocity = Vector2.zero;  
         rb.angularVelocity = 0;      
 
-        objectPool.Release(this);      // Release back to pool
+        objectPool.Release(this);     
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            objectPool.Release(this); // Release back to pool
+            objectPool.Release(this);
         }
     }
 
@@ -77,7 +75,7 @@ public class EnemyBullet : MonoBehaviour
         {
             if(objectPool != null)
             {
-                objectPool.Release(this); // Release back to pool
+                objectPool.Release(this);
             }
         }
     }

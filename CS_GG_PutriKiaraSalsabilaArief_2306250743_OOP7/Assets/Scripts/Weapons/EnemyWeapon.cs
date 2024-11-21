@@ -1,3 +1,4 @@
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -27,7 +28,7 @@ public class EnemyWeapon : MonoBehaviour
         timer = 0f;
         if (EnemyBulletSpawnPoint == null)
         {
-            EnemyBulletSpawnPoint = transform;  // Sets it to the EnemyWeapon's own position and rotation
+            EnemyBulletSpawnPoint = transform;  
         }
     }
 
@@ -87,7 +88,7 @@ public class EnemyWeapon : MonoBehaviour
             if (EnemyBulletObject != null)
             {
                 EnemyBulletObject.transform.SetPositionAndRotation(EnemyBulletSpawnPoint.position, EnemyBulletSpawnPoint.rotation);
-                timer = Time.time + shootIntervalInSeconds; // Set next time to shoot
+                timer = Time.time + shootIntervalInSeconds;
             }
         }
     }

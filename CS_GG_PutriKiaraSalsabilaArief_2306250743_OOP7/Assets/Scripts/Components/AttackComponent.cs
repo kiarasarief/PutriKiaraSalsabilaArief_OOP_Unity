@@ -1,27 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class AttackComponent : MonoBehaviour
 {
-    [SerializeField] private Bullet bullet;
-    [SerializeField] private int damage;
+    public Bullet bullet;
+    public int damage;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        InvincibilityComponent invincibilityComponent = collision.GetComponent<InvincibilityComponent>();
-        
-        if (collision.CompareTag(gameObject.tag))
+        if (other.gameObject.CompareTag(gameObject.tag)) return;
+
+        if (other.GetComponent<HitboxComponent>() != null)
         {
-            return;
+            HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
+
+            if (bullet != null)
+            {
+                hitbox.Damage(bullet.damage);
+            }
+
+            hitbox.Damage(damage);
         }
 
-        HitboxComponent hitbox = collision.GetComponent<HitboxComponent>(); 
-        if (hitbox != null && invincibilityComponent != null && !invincibilityComponent.isInvincible)
+        if (other.GetComponent<InvincibilityComponent>() != null)
         {
-            hitbox.Damage(damage);
-            invincibilityComponent.Flash();
+            other.GetComponent<InvincibilityComponent>().TriggerInvincibility();
         }
     }
 }

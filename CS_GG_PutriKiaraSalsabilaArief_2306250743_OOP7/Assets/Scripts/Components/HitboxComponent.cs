@@ -1,54 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
-    [SerializeField] private HealthComponent healthComponent;
-    [SerializeField] private InvincibilityComponent invincibilityComponent;
+    [SerializeField]
+    HealthComponent health;
 
-    private void Awake()
+    Collider2D area;
+
+    private InvincibilityComponent invincibilityComponent;
+
+
+    void Start()
     {
-        if (healthComponent == null)
-        {
-            healthComponent = GetComponent<HealthComponent>();
-        }
-
-        if (healthComponent == null)
-        {
-            Debug.LogError("HitboxComponent requires a HealthComponent!");
-        }
-
-        if(invincibilityComponent == null)
-        {
-            invincibilityComponent = GetComponent<InvincibilityComponent>();
-            Debug.LogWarning("HitboxComponent requires an InvincibilityComponent!");
-        }
+        area = GetComponent<Collider2D>();
+        invincibilityComponent = GetComponent<InvincibilityComponent>();
     }
 
     public void Damage(Bullet bullet)
     {
-        healthComponent.Subtract(bullet.damage);
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
+
+        if (health != null)
+            health.Subtract(bullet.damage);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(int damage)
     {
-        healthComponent.Subtract(damageAmount);
-    }
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-            if (bullet != null)
-            {
-                if(invincibilityComponent != null && !invincibilityComponent.isInvincible)
-                {
-                    Damage(bullet);
-                }
-            }
-        }
+        if (health != null)
+            health.Subtract(damage);
     }
 }

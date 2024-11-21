@@ -11,11 +11,15 @@ GameObject:
   - component: {fileID: 4119705453397611629}
   - component: {fileID: 4896926460897391640}
   - component: {fileID: 6323402601207355776}
+  - component: {fileID: -7947958927366990804}
+  - component: {fileID: -1138163731384917615}
+  - component: {fileID: 614480355096467683}
+  - component: {fileID: -8483679404356946737}
   - component: {fileID: 5978851902575875701}
   - component: {fileID: 8141829221858227148}
   m_Layer: 0
   m_Name: EnemyForward
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +111,62 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41666666, y: 0.375}
   m_EdgeRadius: 0
+--- !u!114 &-7947958927366990804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481841640794197315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c516b54f48b01f47b7c42fea95ac543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  damage: 10
+--- !u!114 &-1138163731384917615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481841640794197315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ceb5deb0a6ec0e4e91281acfd077135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthComponent: {fileID: -8483679404356946737}
+--- !u!114 &614480355096467683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481841640794197315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa0230b85872974d8f68d1a572c709d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: cc020462282f4b6408f21e8267234315, type: 2}
+  isInvincible: 0
+--- !u!114 &-8483679404356946737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481841640794197315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbe847fb79025149821b5bc4d62e2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
 --- !u!212 &5978851902575875701
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -171,5 +231,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8c047e09928c8498605a79b4bec7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  enemySprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}

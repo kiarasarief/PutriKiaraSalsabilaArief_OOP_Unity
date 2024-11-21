@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+//Putri Kiara Salsabila Arief (2306250743)
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,10 +11,13 @@ public class EnemyForward : Enemy
     private float CameraRight;
     private float CameraLeft;
 
+    EnemyForward()
+    {
+        level = 1;
+    }
 
     private void Start()
     {
-
         CameraTop = Camera.main.transform.position.y + Camera.main.orthographicSize;
         CameraBottom = Camera.main.transform.position.y -Camera.main.orthographicSize;
 
