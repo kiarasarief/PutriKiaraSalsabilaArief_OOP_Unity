@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2136436666766969585
+--- !u!1 &2074416816875887920
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3138535776467233088}
-  - component: {fileID: 6596430903059085110}
+  - component: {fileID: 2198974581250683439}
+  - component: {fileID: 8353289021497903371}
   m_Layer: 0
-  m_Name: EnemySpawner 1
+  m_Name: EnemyClickSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3138535776467233088
+--- !u!4 &2198974581250683439
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136436666766969585}
+  m_GameObject: {fileID: 2074416816875887920}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,25 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6596430903059085110
+--- !u!114 &8353289021497903371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136436666766969585}
+  m_GameObject: {fileID: 2074416816875887920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c203ac3f65ae6a34e8e0b878d18377a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f080775479c9c846b56cda5633c59f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnedEnemy: {fileID: 0}
-  totalKill: 6
-  minimumKillsToIncreaseSpawnCount: 0
-  spawnInterval: 3
-  spawnCount: 2
-  defaultSpawnCount: 2
-  spawnCountMultiplier: 1
-  multiplierIncreaseCount: 1
-  combatManager: {fileID: 0}
-  isSpawning: 0
+  enemyVariants:
+  - {fileID: 8141829221858227148, guid: a04b078f2f5531146ad97dea0b9130e0, type: 3}
+  - {fileID: 6826267172985990286, guid: ec47eadf938a16744b351df46332383a, type: 3}
+  - {fileID: 6890411289603983286, guid: 0a4f55b4826ecf840885d957e548dfb4, type: 3}
+  - {fileID: 603582904276215104, guid: beaae8506f31d5d439da6a64f9f141b2, type: 3}
+  selectedVariant: 0

@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Title.uss?fileID=7433441132597879392&amp;guid=8fc43ea3a0b807d47a50d7d3aef4049f&amp;type=3#Title" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="VoidTer" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-self: center; justify-content: flex-end; align-items: center; -unity-font-style: bold; color: rgb(255, 255, 255); padding-top: 100px;" />
+    </ui:VisualElement>
+</ui:UXML>
